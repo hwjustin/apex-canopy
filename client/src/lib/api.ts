@@ -42,7 +42,16 @@ export const apiFetch = async <T>(
 };
 
 // ─── types ───────────────────────────────────────────────────────
-export type Stage = "idea" | "prototype" | "launched" | "funded";
+export type Stage = "idea" | "building" | "beta" | "launched" | "growing";
+export type Region = "north_america" | "europe" | "asia" | "other";
+export type ProjectType =
+  | "agent_apps" | "ai_copilots" | "ai_workflow" | "ai_infra" | "dev_tools"
+  | "apis_platform" | "saas_productivity" | "data_analytics" | "security_privacy"
+  | "enterprise_software" | "fintech" | "payments" | "commerce" | "sales_crm"
+  | "marketing_growth" | "customer_support" | "hr_recruiting" | "education"
+  | "health_wellness" | "media_creator" | "consumer_social" | "community_tools"
+  | "marketplaces" | "logistics_ops" | "legal_compliance" | "real_estate"
+  | "climate_energy" | "robotics_hardware" | "web3_crypto" | "defi" | "gaming";
 
 export type CanopyProject = {
   id: number;
@@ -51,6 +60,9 @@ export type CanopyProject = {
   tagline: string;
   description: string | null;
   city: string | null;
+  region: Region | null;
+  projectType: ProjectType | null;
+  teamIntro: string | null;
   stage: Stage | null;
   lookingFor: string | null;
   logoUrl: string | null;
@@ -87,6 +99,9 @@ export type ProjectInput = Partial<
     | "tagline"
     | "description"
     | "city"
+    | "region"
+    | "projectType"
+    | "teamIntro"
     | "stage"
     | "lookingFor"
     | "logoUrl"
@@ -101,6 +116,8 @@ export type ProjectInput = Partial<
 export const listProjects = (filters: {
   search?: string;
   city?: string;
+  region?: string;
+  projectType?: string;
   stage?: string;
   tag?: string;
   lookingFor?: string;

@@ -25,12 +25,14 @@ import {
 } from "@/lib/api";
 import { useAuth } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/utils";
+import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, labelFor } from "@/lib/taxonomies";
 
 const STAGE_LABEL: Record<string, { label: string; cls: string }> = {
   idea: { label: "Idea", cls: "canopy-stage-idea" },
-  prototype: { label: "Prototype", cls: "canopy-stage-prototype" },
+  building: { label: "Building", cls: "canopy-stage-building" },
+  beta: { label: "Beta", cls: "canopy-stage-beta" },
   launched: { label: "Launched", cls: "canopy-stage-launched" },
-  funded: { label: "Funded", cls: "canopy-stage-funded" },
+  growing: { label: "Growing", cls: "canopy-stage-growing" },
 };
 
 const initials = (name: string) =>
@@ -185,9 +187,15 @@ export default function Project() {
                 </div>
                 <p className="mt-2 text-lg text-black/75">{project.tagline}</p>
                 <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-black/60">
-                  {project.city && (
+                  {(project.city || project.region) && (
                     <span className="inline-flex items-center gap-1">
-                      <MapPin className="size-4" /> {project.city}
+                      <MapPin className="size-4" />
+                      {[project.city, labelFor(project.region, REGION_OPTIONS)].filter(Boolean).join(" · ")}
+                    </span>
+                  )}
+                  {labelFor(project.projectType, PROJECT_TYPE_OPTIONS) && (
+                    <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs font-medium text-black/70">
+                      {labelFor(project.projectType, PROJECT_TYPE_OPTIONS)}
                     </span>
                   )}
                   {author && <span>by {author.name}</span>}
@@ -219,6 +227,15 @@ export default function Project() {
             {project.description && (
               <div className="mt-8 whitespace-pre-wrap rounded-3xl border border-black/10 bg-white p-6 text-[15px] leading-relaxed text-black/80">
                 {project.description}
+              </div>
+            )}
+
+            {project.teamIntro && (
+              <div className="mt-6 rounded-3xl border border-black/10 bg-white p-6">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-black/50">Team</h2>
+                <p className="mt-2 whitespace-pre-wrap text-[15px] leading-relaxed text-black/80">
+                  {project.teamIntro}
+                </p>
               </div>
             )}
 

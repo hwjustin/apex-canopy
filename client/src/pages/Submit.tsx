@@ -14,8 +14,11 @@ import {
   getProject,
   updateProject,
   type ProjectInput,
+  type ProjectType,
+  type Region,
   type Stage,
 } from "@/lib/api";
+import { PROJECT_TYPE_GROUPS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
 import { useAuth } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +27,9 @@ type FormState = {
   tagline: string;
   description: string;
   city: string;
+  region: Region | "";
+  projectType: ProjectType | "";
+  teamIntro: string;
   stage: Stage | "";
   lookingFor: string;
   logoUrl: string | null;
@@ -39,6 +45,9 @@ const empty: FormState = {
   tagline: "",
   description: "",
   city: "",
+  region: "",
+  projectType: "",
+  teamIntro: "",
   stage: "",
   lookingFor: "",
   logoUrl: null,
@@ -48,13 +57,6 @@ const empty: FormState = {
   emailContact: "",
   tags: [],
 };
-
-const STAGES: { key: Stage; label: string }[] = [
-  { key: "idea", label: "Idea" },
-  { key: "prototype", label: "Prototype" },
-  { key: "launched", label: "Launched" },
-  { key: "funded", label: "Funded" },
-];
 
 const LOOKING_FOR = [
   { key: "co-founder", label: "Co-founder" },
@@ -93,6 +95,9 @@ export default function Submit() {
           tagline: p.tagline,
           description: p.description ?? "",
           city: p.city ?? "",
+          region: (p.region ?? "") as FormState["region"],
+          projectType: (p.projectType ?? "") as FormState["projectType"],
+          teamIntro: p.teamIntro ?? "",
           stage: (p.stage ?? "") as FormState["stage"],
           lookingFor: p.lookingFor ?? "",
           logoUrl: p.logoUrl,
@@ -139,6 +144,9 @@ export default function Submit() {
         tagline: form.tagline.trim(),
         description: form.description.trim() || undefined,
         city: form.city.trim() || undefined,
+        region: (form.region || undefined) as Region | undefined,
+        projectType: (form.projectType || undefined) as ProjectType | undefined,
+        teamIntro: form.teamIntro.trim() || undefined,
         stage: (form.stage || undefined) as Stage | undefined,
         lookingFor: form.lookingFor || undefined,
         logoUrl: form.logoUrl || undefined,
@@ -240,19 +248,59 @@ export default function Submit() {
               />
             </div>
             <div className="space-y-1.5">
+              <Label>Region</Label>
+              <select
+                value={form.region}
+                onChange={(e) => set("region", e.target.value as FormState["region"])}
+                className="h-10 w-full rounded-md border border-black/15 bg-white px-3 text-sm"
+              >
+                <option value="">—</option>
+                {REGION_OPTIONS.map((r) => (
+                  <option key={r.value} value={r.value}>{r.label}</option>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label>Project type</Label>
+              <select
+                value={form.projectType}
+                onChange={(e) => set("projectType", e.target.value as FormState["projectType"])}
+                className="h-10 w-full rounded-md border border-black/15 bg-white px-3 text-sm"
+              >
+                <option value="">—</option>
+                {PROJECT_TYPE_GROUPS.map((g) => (
+                  <optgroup key={g.group} label={g.group}>
+                    {g.options.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-1.5 sm:col-span-2">
               <Label>Stage</Label>
               <div className="flex flex-wrap gap-1.5">
-                {STAGES.map((s) => (
+                {STAGE_OPTIONS.map((s) => (
                   <button
-                    key={s.key}
+                    key={s.value}
                     type="button"
-                    onClick={() => set("stage", form.stage === s.key ? "" : s.key)}
-                    className={cn(form.stage === s.key ? "canopy-chip-active" : "canopy-chip")}
+                    onClick={() => set("stage", form.stage === s.value ? "" : s.value)}
+                    className={cn(form.stage === s.value ? "canopy-chip-active" : "canopy-chip")}
                   >
                     {s.label}
                   </button>
                 ))}
               </div>
+            </div>
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label>Team intro <span className="text-black/40 font-normal">(who's building this)</span></Label>
+              <Textarea
+                value={form.teamIntro}
+                onChange={(e) => set("teamIntro", e.target.value)}
+                rows={3}
+                maxLength={1000}
+                placeholder="Two ex-Stripe engineers + one designer from Figma…"
+              />
             </div>
             <div className="space-y-1.5 sm:col-span-2">
               <Label>Looking for</Label>

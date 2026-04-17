@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import type { CanopyProject } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, labelFor } from "@/lib/taxonomies";
 
 const STAGE_LABEL: Record<string, { label: string; cls: string }> = {
   idea: { label: "Idea", cls: "canopy-stage-idea" },
-  prototype: { label: "Prototype", cls: "canopy-stage-prototype" },
+  building: { label: "Building", cls: "canopy-stage-building" },
+  beta: { label: "Beta", cls: "canopy-stage-beta" },
   launched: { label: "Launched", cls: "canopy-stage-launched" },
-  funded: { label: "Funded", cls: "canopy-stage-funded" },
+  growing: { label: "Growing", cls: "canopy-stage-growing" },
 };
 
 const initials = (name: string) =>
@@ -23,6 +25,8 @@ const initials = (name: string) =>
 
 export function ProjectCard({ project, index = 0 }: { project: CanopyProject; index?: number }) {
   const stage = project.stage ? STAGE_LABEL[project.stage] : null;
+  const region = labelFor(project.region, REGION_OPTIONS);
+  const projectType = labelFor(project.projectType, PROJECT_TYPE_OPTIONS);
   const tilt = (index % 5) - 2; // -2..2 deg, deterministic per-card
   return (
     <motion.div
@@ -62,9 +66,16 @@ export function ProjectCard({ project, index = 0 }: { project: CanopyProject; in
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-black/60">
-          {project.city && (
+          {(project.city || region) && (
             <span className="inline-flex items-center gap-1">
-              <MapPin className="size-3.5" /> {project.city}
+              <MapPin className="size-3.5" /> {[project.city, region].filter(Boolean).join(" · ")}
+            </span>
+          )}
+          {projectType && (
+            <span className="inline-flex items-center gap-1">
+              <span className="rounded-full bg-black/5 px-2 py-0.5 font-medium text-black/70">
+                {projectType}
+              </span>
             </span>
           )}
           {project.lookingFor && (

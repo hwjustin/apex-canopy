@@ -110,9 +110,10 @@
   }
 
   .canopy-stage-idea      { @apply bg-[oklch(0.97_0_0)] text-black border border-black/10; }
-  .canopy-stage-prototype { @apply bg-[oklch(0.88_0.08_290)] text-black; }
+  .canopy-stage-building  { @apply bg-[oklch(0.88_0.08_290)] text-black; }
+  .canopy-stage-beta      { @apply bg-[oklch(0.92_0.10_60)] text-black; }
   .canopy-stage-launched  { @apply bg-[oklch(0.88_0.17_90)] text-black; }
-  .canopy-stage-funded    { @apply bg-[oklch(0.55_0.14_155)] text-white; }
+  .canopy-stage-growing   { @apply bg-[oklch(0.55_0.14_155)] text-white; }
 }
 
 @keyframes float {

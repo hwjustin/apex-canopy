@@ -16,6 +16,8 @@ export default function Browse() {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({
     city: "",
+    region: "",
+    projectType: "",
     stage: "",
     tag: "",
     lookingFor: "",
@@ -43,6 +45,8 @@ export default function Browse() {
         const res = await listProjects({
           search: search || undefined,
           city: filters.city || undefined,
+          region: filters.region || undefined,
+          projectType: filters.projectType || undefined,
           stage: filters.stage || undefined,
           tag: filters.tag || undefined,
           lookingFor: filters.lookingFor || undefined,
