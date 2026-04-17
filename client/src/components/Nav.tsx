@@ -3,21 +3,28 @@ import { LogIn, LogOut, Plus, User, TreePine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthProvider";
 
-export function Nav() {
+export function Nav({ tagline }: { tagline?: string }) {
   const { user, logout } = useAuth();
   const [, navigate] = useLocation();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-white/90 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-extrabold text-lg">
-          <span className="inline-flex size-9 items-center justify-center rounded-full bg-[oklch(0.55_0.14_155)] text-white">
-            <TreePine className="size-5" />
-          </span>
-          <span>
-            Canopy<span className="text-[oklch(0.55_0.14_155)]">.</span>Meetup
-          </span>
-        </Link>
+      <div className="container flex h-16 items-center justify-between gap-4">
+        <div className="flex items-center gap-3 min-w-0">
+          <Link href="/" className="flex items-center gap-2 font-extrabold text-lg shrink-0">
+            <span className="inline-flex size-9 items-center justify-center rounded-full bg-[oklch(0.55_0.14_155)] text-white">
+              <TreePine className="size-5" />
+            </span>
+            <span>
+              Canopy<span className="text-[oklch(0.55_0.14_155)]">.</span>Meetup
+            </span>
+          </Link>
+          {tagline ? (
+            <span className="hidden lg:inline-block truncate border-l border-black/10 pl-3 text-sm text-black/60">
+              {tagline}
+            </span>
+          ) : null}
+        </div>
 
         <nav className="flex items-center gap-2">
           <Link href="/" className="hidden sm:inline-block text-sm font-medium text-black/70 hover:text-black px-3">
