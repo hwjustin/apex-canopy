@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
+import { LOOKING_FOR_OPTIONS, PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
 
 type FilterValues = {
   city: string;
@@ -17,13 +17,6 @@ type Props = {
   cities: string[];
   tags: { tag: string; count: number }[];
 };
-
-const LOOKING_FOR = [
-  { key: "co-founder", label: "Co-founder" },
-  { key: "users", label: "Early users" },
-  { key: "advice", label: "Advice" },
-  { key: "partnerships", label: "Partnerships" },
-];
 
 export function FilterSidebar({ value, onChange, cities, tags }: Props) {
   const set = <K extends keyof FilterValues>(k: K, v: FilterValues[K]) =>
@@ -110,11 +103,11 @@ export function FilterSidebar({ value, onChange, cities, tags }: Props) {
 
       <Section title="Looking for">
         <div className="flex flex-wrap gap-1.5">
-          {LOOKING_FOR.map((s) => (
+          {LOOKING_FOR_OPTIONS.map((s) => (
             <Chip
-              key={s.key}
-              active={value.lookingFor === s.key}
-              onClick={() => set("lookingFor", value.lookingFor === s.key ? "" : s.key)}
+              key={s.value}
+              active={value.lookingFor === s.value}
+              onClick={() => set("lookingFor", value.lookingFor === s.value ? "" : s.value)}
             >
               {s.label}
             </Chip>

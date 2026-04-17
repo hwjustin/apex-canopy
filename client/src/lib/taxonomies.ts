@@ -19,6 +19,19 @@ export const REGION_OPTIONS: { value: Region; label: string }[] = [
   { value: "other", label: "Other" },
 ];
 
+export const LOOKING_FOR_OPTIONS: { value: string; label: string }[] = [
+  { value: "cofounder", label: "Cofounder" },
+  { value: "engineers", label: "Engineers" },
+  { value: "designers", label: "Designers" },
+  { value: "gtm", label: "GTM help" },
+  { value: "pilot_users", label: "Pilot users" },
+  { value: "customer_intros", label: "Customer intros" },
+  { value: "distribution", label: "Distribution partners" },
+  { value: "community", label: "Community support" },
+  { value: "advisors", label: "Advisors" },
+  { value: "investors", label: "Investors" },
+];
+
 export const PROJECT_TYPE_OPTIONS: { value: ProjectType; label: string }[] = [
   { value: "agent_apps", label: "Agent applications" },
   { value: "ai_copilots", label: "AI copilots / assistants" },

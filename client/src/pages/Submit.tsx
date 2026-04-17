@@ -18,7 +18,7 @@ import {
   type Region,
   type Stage,
 } from "@/lib/api";
-import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
+import { LOOKING_FOR_OPTIONS, PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
 import { useAuth } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/utils";
 
@@ -57,13 +57,6 @@ const empty: FormState = {
   emailContact: "",
   tags: [],
 };
-
-const LOOKING_FOR = [
-  { key: "co-founder", label: "Co-founder" },
-  { key: "users", label: "Early users" },
-  { key: "advice", label: "Advice" },
-  { key: "partnerships", label: "Partnerships" },
-];
 
 export default function Submit() {
   const { user, loading } = useAuth();
@@ -301,12 +294,12 @@ export default function Submit() {
             <div className="space-y-1.5 sm:col-span-2">
               <Label>Looking for</Label>
               <div className="flex flex-wrap gap-1.5">
-                {LOOKING_FOR.map((s) => (
+                {LOOKING_FOR_OPTIONS.map((s) => (
                   <button
-                    key={s.key}
+                    key={s.value}
                     type="button"
-                    onClick={() => set("lookingFor", form.lookingFor === s.key ? "" : s.key)}
-                    className={cn(form.lookingFor === s.key ? "canopy-chip-active" : "canopy-chip")}
+                    onClick={() => set("lookingFor", form.lookingFor === s.value ? "" : s.value)}
+                    className={cn(form.lookingFor === s.value ? "canopy-chip-active" : "canopy-chip")}
                   >
                     {s.label}
                   </button>
