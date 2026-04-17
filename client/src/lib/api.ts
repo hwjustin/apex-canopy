@@ -43,7 +43,15 @@ export const apiFetch = async <T>(
 
 // ─── types ───────────────────────────────────────────────────────
 export type Stage = "idea" | "building" | "beta" | "launched" | "growing";
-export type Region = "north_america" | "europe" | "asia" | "other";
+export type Region =
+  | "north_america"
+  | "south_america"
+  | "europe"
+  | "africa"
+  | "middle_east"
+  | "asia"
+  | "oceania"
+  | "other";
 export type ProjectType =
   | "agent_apps" | "ai_copilots" | "ai_workflow" | "ai_infra" | "dev_tools"
   | "apis_platform" | "saas_productivity" | "data_analytics" | "security_privacy"

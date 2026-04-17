@@ -18,7 +18,7 @@ import {
   type Region,
   type Stage,
 } from "@/lib/api";
-import { PROJECT_TYPE_GROUPS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
+import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
 import { useAuth } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/utils";
 
@@ -268,12 +268,8 @@ export default function Submit() {
                 className="h-10 w-full rounded-md border border-black/15 bg-white px-3 text-sm"
               >
                 <option value="">—</option>
-                {PROJECT_TYPE_GROUPS.map((g) => (
-                  <optgroup key={g.group} label={g.group}>
-                    {g.options.map((o) => (
-                      <option key={o.value} value={o.value}>{o.label}</option>
-                    ))}
-                  </optgroup>
+                {PROJECT_TYPE_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
             </div>
@@ -403,7 +399,7 @@ export default function Submit() {
               )}
             </div>
             <div className="flex gap-2">
-              <Button type="button" variant="outline" onClick={() => navigate("/me")}>
+              <Button type="button" variant="outline" size="lg" className="rounded-full" onClick={() => navigate("/me")}>
                 Cancel
               </Button>
               <Button type="submit" variant="dark" size="lg" className="rounded-full" disabled={submitting}>

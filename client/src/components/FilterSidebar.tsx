@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { PROJECT_TYPE_GROUPS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
+import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, STAGE_OPTIONS } from "@/lib/taxonomies";
 
 type FilterValues = {
   city: string;
@@ -102,12 +102,8 @@ export function FilterSidebar({ value, onChange, cities, tags }: Props) {
           className="h-9 w-full rounded-md border border-black/15 bg-white px-2 text-sm"
         >
           <option value="">Any type</option>
-          {PROJECT_TYPE_GROUPS.map((g) => (
-            <optgroup key={g.group} label={g.group}>
-              {g.options.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </optgroup>
+          {PROJECT_TYPE_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
       </Section>
