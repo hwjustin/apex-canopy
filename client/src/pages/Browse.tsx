@@ -78,7 +78,7 @@ export default function Browse() {
 
   return (
     <>
-      <Nav tagline="Founder directory for Canopy at Founders, Inc. — browse, react, and connect." />
+      <Nav tagline="A chill founder directory for Canopy at Founders, Inc." />
 
       {/* Search + grid */}
       <section id="grid" className="py-8 md:py-10">
