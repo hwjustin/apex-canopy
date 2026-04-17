@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { CanopyProject } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { PROJECT_TYPE_OPTIONS, REGION_OPTIONS, labelFor } from "@/lib/taxonomies";
+import { LOOKING_FOR_OPTIONS, PROJECT_TYPE_OPTIONS, REGION_OPTIONS, labelFor } from "@/lib/taxonomies";
 
 const STAGE_LABEL: Record<string, { label: string; cls: string }> = {
   idea: { label: "Idea", cls: "canopy-stage-idea" },
@@ -78,10 +78,14 @@ export function ProjectCard({ project, index = 0 }: { project: CanopyProject; in
               </span>
             </span>
           )}
-          {project.lookingFor && (
-            <span className="inline-flex items-center gap-1 capitalize">
+          {project.lookingFor.length > 0 && (
+            <span className="inline-flex items-center gap-1">
               <span className="text-black/40">looking for</span>
-              <span className="font-medium text-black/80">{project.lookingFor}</span>
+              <span className="font-medium text-black/80">
+                {project.lookingFor
+                  .map((v) => labelFor(v, LOOKING_FOR_OPTIONS) ?? v)
+                  .join(", ")}
+              </span>
             </span>
           )}
           {typeof project.reactionCount === "number" && project.reactionCount > 0 && (

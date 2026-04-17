@@ -31,7 +31,7 @@ type FormState = {
   projectType: ProjectType | "";
   teamIntro: string;
   stage: Stage | "";
-  lookingFor: string;
+  lookingFor: string[];
   logoUrl: string | null;
   website: string;
   twitter: string;
@@ -49,7 +49,7 @@ const empty: FormState = {
   projectType: "",
   teamIntro: "",
   stage: "",
-  lookingFor: "",
+  lookingFor: [],
   logoUrl: null,
   website: "",
   twitter: "",
@@ -92,7 +92,7 @@ export default function Submit() {
           projectType: (p.projectType ?? "") as FormState["projectType"],
           teamIntro: p.teamIntro ?? "",
           stage: (p.stage ?? "") as FormState["stage"],
-          lookingFor: p.lookingFor ?? "",
+          lookingFor: p.lookingFor ?? [],
           logoUrl: p.logoUrl,
           website: p.website ?? "",
           twitter: p.twitter ?? "",
@@ -141,7 +141,7 @@ export default function Submit() {
         projectType: (form.projectType || undefined) as ProjectType | undefined,
         teamIntro: form.teamIntro.trim() || undefined,
         stage: (form.stage || undefined) as Stage | undefined,
-        lookingFor: form.lookingFor || undefined,
+        lookingFor: form.lookingFor.length ? form.lookingFor : undefined,
         logoUrl: form.logoUrl || undefined,
         website: form.website.trim() || undefined,
         twitter: form.twitter.trim() || undefined,
@@ -294,16 +294,26 @@ export default function Submit() {
             <div className="space-y-1.5 sm:col-span-2">
               <Label>Looking for</Label>
               <div className="flex flex-wrap gap-1.5">
-                {LOOKING_FOR_OPTIONS.map((s) => (
-                  <button
-                    key={s.value}
-                    type="button"
-                    onClick={() => set("lookingFor", form.lookingFor === s.value ? "" : s.value)}
-                    className={cn(form.lookingFor === s.value ? "canopy-chip-active" : "canopy-chip")}
-                  >
-                    {s.label}
-                  </button>
-                ))}
+                {LOOKING_FOR_OPTIONS.map((s) => {
+                  const active = form.lookingFor.includes(s.value);
+                  return (
+                    <button
+                      key={s.value}
+                      type="button"
+                      onClick={() =>
+                        set(
+                          "lookingFor",
+                          active
+                            ? form.lookingFor.filter((v) => v !== s.value)
+                            : [...form.lookingFor, s.value],
+                        )
+                      }
+                      className={cn(active ? "canopy-chip-active" : "canopy-chip")}
+                    >
+                      {s.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div className="space-y-1.5 sm:col-span-2">

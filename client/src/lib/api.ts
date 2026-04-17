@@ -72,7 +72,7 @@ export type CanopyProject = {
   projectType: ProjectType | null;
   teamIntro: string | null;
   stage: Stage | null;
-  lookingFor: string | null;
+  lookingFor: string[];
   logoUrl: string | null;
   website: string | null;
   twitter: string | null;
@@ -111,14 +111,13 @@ export type ProjectInput = Partial<
     | "projectType"
     | "teamIntro"
     | "stage"
-    | "lookingFor"
     | "logoUrl"
     | "website"
     | "twitter"
     | "linkedin"
     | "emailContact"
   >
-> & { tags?: string[] };
+> & { tags?: string[]; lookingFor?: string[] };
 
 // ─── helpers ─────────────────────────────────────────────────────
 export const listProjects = (filters: {
