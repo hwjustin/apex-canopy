@@ -84,7 +84,7 @@ export default function Browse() {
         <div className="container py-7 md:py-9">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-              not the official directory — just where the cohort actually hangs.
+              not the official directory — just where the cohort actually hangs. 🎉
             </h1>
             <p className="max-w-2xl text-sm md:text-base text-black/60">
               pin what you're cooking, see who's around, slide into a DM. no pitch decks, no kpis — just builders.
