@@ -64,11 +64,11 @@ export default function Browse() {
       !loading && count === 0 ? (
         <div className="rounded-3xl border border-dashed border-black/15 bg-white p-12 text-center">
           <Sparkles className="mx-auto size-8 text-black/30" />
-          <p className="mt-4 text-lg font-semibold">No projects match your filters.</p>
+          <p className="mt-4 text-lg font-semibold">nothing here yet.</p>
           <p className="mt-1 text-sm text-black/60">
-            Try clearing filters, or{" "}
+            clear a filter, or{" "}
             <Link href={user ? "/submit" : "/register"} className="underline underline-offset-4">
-              be the first to post.
+              pin something first.
             </Link>
           </p>
         </div>
@@ -79,6 +79,23 @@ export default function Browse() {
   return (
     <>
       <Nav tagline="A chill founder directory for Canopy at Founders, Inc." />
+
+      <section className="paper-grain border-b border-black/5">
+        <div className="container py-7 md:py-9">
+          <div className="flex flex-col items-start gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-[oklch(0.88_0.17_90)]/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-black">
+              <span className="size-1.5 rounded-full bg-black" />
+              unofficial · made with love
+            </span>
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+              not the official directory — just where the cohort actually hangs.
+            </h1>
+            <p className="max-w-2xl text-sm md:text-base text-black/60">
+              pin what you're cooking, see who's around, slide into a DM. no pitch decks, no kpis — just builders.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Search + grid */}
       <section id="grid" className="py-8 md:py-10">
@@ -93,7 +110,7 @@ export default function Browse() {
             >
               <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-black/40" />
               <Input
-                placeholder="Search projects, tags, cities…"
+                placeholder="search projects, tags, cities…"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 onBlur={() => setSearch(searchInput.trim())}
@@ -109,7 +126,7 @@ export default function Browse() {
             <FilterSidebar value={filters} onChange={setFilters} cities={cities} tags={tags} />
             <div>
               {empty}
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-3 pt-3">
                 {projects.map((p, i) => (
                   <ProjectCard key={p.id} project={p} index={i} />
                 ))}

@@ -43,9 +43,9 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0 0 0);
-  --card: oklch(1 0 0);
+  --background: oklch(0.97 0.025 85);
+  --foreground: oklch(0.18 0.02 60);
+  --card: oklch(0.995 0.008 85);
   --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0 0 0);
@@ -120,3 +120,35 @@
   50% { transform: translateY(-10px); }
 }
 .animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Bulletin-board "tape" corners for cards. */
+.tape-corner::before,
+.tape-corner::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 56px;
+  height: 18px;
+  background: oklch(0.92 0.07 90 / 0.7);
+  border: 1px solid oklch(0.85 0.06 90 / 0.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+.tape-corner::before {
+  left: 18px;
+  transform: rotate(-6deg);
+}
+.tape-corner::after {
+  right: 18px;
+  transform: rotate(5deg);
+}
+
+/* Subtle paper grain background */
+.paper-grain {
+  background-image:
+    radial-gradient(oklch(0.85 0.04 80 / 0.18) 1px, transparent 1px),
+    radial-gradient(oklch(0.85 0.04 80 / 0.12) 1px, transparent 1px);
+  background-size: 22px 22px, 14px 14px;
+  background-position: 0 0, 7px 11px;
+}

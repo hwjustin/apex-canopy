@@ -8,7 +8,7 @@ export function Nav({ tagline }: { tagline?: string }) {
   const [, navigate] = useLocation();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-[oklch(0.97_0.025_85)]/85 backdrop-blur">
       <div className="container flex h-16 items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <Link href="/" className="flex items-center gap-2 font-extrabold text-lg shrink-0">

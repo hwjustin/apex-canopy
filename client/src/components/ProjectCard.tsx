@@ -23,16 +23,18 @@ const initials = (name: string) =>
 
 export function ProjectCard({ project, index = 0 }: { project: CanopyProject; index?: number }) {
   const stage = project.stage ? STAGE_LABEL[project.stage] : null;
+  const tilt = (index % 5) - 2; // -2..2 deg, deterministic per-card
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.03, 0.3), duration: 0.3 }}
-      className="group"
+      className="group relative tape-corner"
+      style={{ transform: `rotate(${tilt * 0.4}deg)` }}
     >
       <Link
         href={`/project/${project.id}`}
-        className="block h-full rounded-3xl border border-black/10 bg-white p-6 transition-all hover:border-black/30 hover:-translate-y-0.5 hover:shadow-lg"
+        className="block h-full rounded-2xl border border-black/10 bg-[var(--card)] p-6 shadow-[0_1px_0_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.12)] transition-all hover:border-black/30 hover:-translate-y-1 hover:shadow-[0_2px_0_rgba(0,0,0,0.06),0_16px_32px_-12px_rgba(0,0,0,0.18)] hover:rotate-0"
       >
         <div className="flex items-start gap-4">
           {project.logoUrl ? (
