@@ -27,9 +27,6 @@ export function Nav({ tagline }: { tagline?: string }) {
         </div>
 
         <nav className="flex items-center gap-2">
-          <Link href="/" className="hidden sm:inline-block text-sm font-medium text-black/70 hover:text-black px-3">
-            Browse
-          </Link>
           {user ? (
             <>
               <Button
@@ -58,7 +55,7 @@ export function Nav({ tagline }: { tagline?: string }) {
                 </Link>
               </Button>
               <Button variant="default" size="sm" asChild className="rounded-full">
-                <Link href="/register">Join Canopy</Link>
+                <Link href="/register">Register</Link>
               </Button>
             </>
           )}
