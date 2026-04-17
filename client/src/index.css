@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Canopy Meetup — visual language inherited from APEX.
+ * - Yellow accent (APEX), black text, white bg, forest-green secondary.
+ * - Poppins typography, rounded cards, pill tags.
+ */
+
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-canopy-yellow: oklch(0.88 0.17 90);
+  --color-canopy-green: oklch(0.55 0.14 155);
+  --color-canopy-lavender: oklch(0.88 0.08 290);
+  --color-canopy-black: oklch(0 0 0);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.88 0.17 90);
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.55 0.14 155);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.4 0 0);
+  --accent: oklch(0.88 0.17 90);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.88 0.17 90);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html, body {
+    @apply bg-background text-foreground font-sans;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; }
+  }
+
+  .canopy-section-yellow { @apply bg-[oklch(0.88_0.17_90)] text-black; }
+  .canopy-section-black  { @apply bg-black text-white; }
+  .canopy-section-green  { @apply bg-[oklch(0.55_0.14_155)] text-white; }
+
+  .canopy-badge {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-full bg-black text-white;
+  }
+
+  .canopy-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-medium text-black hover:border-black/30 transition-colors;
+  }
+
+  .canopy-chip-active {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-black bg-black px-3 py-1 text-xs font-medium text-white;
+  }
+
+  .canopy-stage-idea      { @apply bg-[oklch(0.97_0_0)] text-black border border-black/10; }
+  .canopy-stage-prototype { @apply bg-[oklch(0.88_0.08_290)] text-black; }
+  .canopy-stage-launched  { @apply bg-[oklch(0.88_0.17_90)] text-black; }
+  .canopy-stage-funded    { @apply bg-[oklch(0.55_0.14_155)] text-white; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
