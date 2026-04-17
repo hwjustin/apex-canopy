@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LogIn, LogOut, Plus, User, TreePine } from "lucide-react";
+import { LogIn, LogOut, Plus, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthProvider";
 
@@ -12,12 +12,11 @@ export function Nav({ tagline }: { tagline?: string }) {
       <div className="container flex h-16 items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <Link href="/" className="flex items-center gap-2 font-extrabold text-lg shrink-0">
-            <span className="inline-flex size-9 items-center justify-center rounded-full bg-[oklch(0.55_0.14_155)] text-white">
-              <TreePine className="size-5" />
-            </span>
             <span>
               Canopy<span className="text-[oklch(0.55_0.14_155)]">.</span>Meetup
             </span>
+            <span className="text-sm font-medium text-black/50">by</span>
+            <img src="/images/apex-logo.png" alt="APEX" className="h-7 w-auto" />
           </Link>
           {tagline ? (
             <span className="hidden lg:inline-block truncate border-l border-black/10 pl-3 text-sm text-black/60">
