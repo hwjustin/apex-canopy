@@ -26,7 +26,7 @@ export const LOOKING_FOR_OPTIONS: { value: string; label: string }[] = [
   { value: "gtm", label: "GTM help" },
   { value: "pilot_users", label: "Pilot users" },
   { value: "customer_intros", label: "Customer intros" },
-  { value: "distribution", label: "Distribution partners" },
+  { value: "sales", label: "Sales" },
   { value: "community", label: "Community support" },
   { value: "advisors", label: "Advisors" },
   { value: "investors", label: "Investors" },
