@@ -6,4 +6,10 @@ Deployed at **canopy.apexnetwork.app**.
 
 ## Contributing
 
-Want to help make this better? Open an issue or PR — ideas, bug reports, and contributions all welcome.
+Want to help make this better? Open an [issue](https://github.com/hwjustin/apex-canopy/issues) or PR — ideas, bug reports, and contributions all welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the workflow.
+
+`main` is protected — please work on a feature branch and open a pull request.
+
+## License
+
+[Apache License 2.0](./LICENSE) © APEX team
