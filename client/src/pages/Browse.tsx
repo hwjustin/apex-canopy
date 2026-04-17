@@ -83,10 +83,6 @@ export default function Browse() {
       <section className="paper-grain border-b border-black/5">
         <div className="container py-7 md:py-9">
           <div className="flex flex-col items-start gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-[oklch(0.88_0.17_90)]/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-black">
-              <span className="size-1.5 rounded-full bg-black" />
-              unofficial · made with love
-            </span>
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               not the official directory — just where the cohort actually hangs.
             </h1>
