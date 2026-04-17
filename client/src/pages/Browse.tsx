@@ -78,7 +78,7 @@ export default function Browse() {
 
   return (
     <>
-      <Nav tagline="Founder directory for the Canopy accelerator — browse, react, and connect." />
+      <Nav tagline="Founder directory for Canopy at Founders, Inc. — browse, react, and connect." />
 
       {/* Search + grid */}
       <section id="grid" className="py-8 md:py-10">
@@ -120,7 +120,7 @@ export default function Browse() {
       </section>
 
       <footer className="border-t border-black/10 py-10 text-center text-xs text-black/50">
-        Built with 🌳 by the APEX team · Canopy cohort · {new Date().getFullYear()}
+        Built with 🌳 by the APEX team · Canopy at Founders, Inc. · {new Date().getFullYear()}
       </footer>
     </>
   );
