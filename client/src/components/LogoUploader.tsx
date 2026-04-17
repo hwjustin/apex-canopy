@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { ImagePlus, Loader2, X } from "lucide-react";
+import { upload } from "@vercel/blob/client";
 import { toast } from "sonner";
 import { buildUrl } from "@/lib/api";
 import { getStoredToken } from "@/lib/auth";
@@ -17,19 +18,13 @@ export function LogoUploader({ value, onChange }: Props) {
     setUploading(true);
     try {
       const token = getStoredToken();
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await fetch(buildUrl("/api/canopy/uploads/image").toString(), {
-        method: "POST",
-        body: fd,
+      const result = await upload(file.name, file, {
+        access: "public",
+        handleUploadUrl: buildUrl("/api/canopy/uploads/blob-token").toString(),
+        clientPayload: null,
         headers: token ? { authorization: `Bearer ${token}` } : undefined,
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || `upload failed (${res.status})`);
-      }
-      const { url } = (await res.json()) as { url: string };
-      onChange(url);
+      } as any);
+      onChange(result.url);
     } catch (err: any) {
       toast.error(err?.message || "Upload failed");
     } finally {
