@@ -1,4 +1,5 @@
 import { Route, Switch } from "wouter";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/contexts/AuthProvider";
 import Browse from "@/pages/Browse";
@@ -31,6 +32,7 @@ export default function App() {
     <AuthProvider>
       <Toaster position="top-right" />
       <Router />
+      <Analytics />
     </AuthProvider>
   );
 }
